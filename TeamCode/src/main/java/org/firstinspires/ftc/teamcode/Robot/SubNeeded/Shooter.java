@@ -16,6 +16,9 @@ public class Shooter {
     BallsDecision ballsDecision;
     ColorSensor cs;
 
+    double NectarP = .05, PollenP = .4;
+    double t; boolean activate = false;
+
     public void init(HardwareMap map){
         f1 = map.get(DcMotorEx.class, "f1");
         f2 = map.get(DcMotorEx.class, "f2");
@@ -33,7 +36,7 @@ public class Shooter {
         ballsDecision = new BallsDecision();
         ballsDecision.init(cs);
 
-        adjustPress.setPosition(0.0); // Initial pressure
+        adjustPress.setPosition(PollenP); // Initial pressure
     }
 
     public double calculate() {
@@ -42,17 +45,29 @@ public class Shooter {
     public void update() {
         BallsColour detection = ballsDecision.ballReco();
         setPressure(detection);
+
+        startShoot();
     }
 
+    private void startShoot() {
+        double sum = 0;
+        if (activate) {
+
+        }
+    }
+
+    public void setActive() {
+        if(!activate) { activate = true; }
+    }
     private void setPressure(BallsColour color) {
         switch (color){
             case POLLEN:
-                adjustPress.setPosition(0.0);
+                adjustPress.setPosition(PollenP);
                 break;
 
             case NECTAR_BLUE:
             case NECTAR_RED:
-                adjustPress.setPosition(.4);
+                adjustPress.setPosition(NectarP);
                 break;
         }
     }

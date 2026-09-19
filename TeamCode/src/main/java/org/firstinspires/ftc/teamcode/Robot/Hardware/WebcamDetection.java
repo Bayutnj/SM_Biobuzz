@@ -103,7 +103,7 @@ public class WebcamDetection {
             }
         }
 
-        if (best == null) return;;
+        if (best == null) return;
 
         detectedId = best.id;
         d = best.ftcPose.range;
