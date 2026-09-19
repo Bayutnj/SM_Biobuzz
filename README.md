@@ -1735,3 +1735,4 @@ Changes include:
    - Support for encoders with the Legacy Module is now working.
  * The hardware loop has been updated for better performance.
 # SM_Biobuzz
+# SM_Biobuzz
