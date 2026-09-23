@@ -16,7 +16,7 @@ public class Intake {
         I.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.FLOAT);
     }
 
-    public void set(double p) {
+    public void setButton(double p) {
         I.setPower(p);
     }
 

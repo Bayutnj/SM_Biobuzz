@@ -17,7 +17,7 @@ public class Shooter {
     ColorSensor cs;
 
     double NectarP = .05, PollenP = .4;
-    double t; boolean activate = false;
+    double t; boolean activate = false, lastTrigger = false;
 
     public void init(HardwareMap map){
         f1 = map.get(DcMotorEx.class, "f1");
@@ -42,11 +42,9 @@ public class Shooter {
     public double calculate() {
         return 0;
     }
-    public void update() {
+    public void updateServo() {
         BallsColour detection = ballsDecision.ballReco();
         setPressure(detection);
-
-        startShoot();
     }
 
     private void startShoot() {
@@ -58,6 +56,14 @@ public class Shooter {
 
     public void setActive() {
         if(!activate) { activate = true; }
+    }
+    public void setInactive() { if(activate) {activate = false;} }
+    public void setButton(boolean b) { this.activate = b; }
+    public void setToggle(boolean tof) {
+        if (tof && !lastTrigger) {
+            activate = !activate;
+        }
+        lastTrigger = tof;
     }
     private void setPressure(BallsColour color) {
         switch (color){
